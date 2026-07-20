@@ -5,6 +5,8 @@ Sudoku_Move selection;
 Sudoku sudo;
 
 void Setup(AlxWindow* w){
+	Random_Set(Time_Nano());
+
     sudo = Sudoku_New();
 	selection = (Sudoku_Move){
 		.i = 0U,
@@ -31,6 +33,12 @@ void Update(AlxWindow* w){
 			selection = selection_m;
 			Sudoku_Remove(&sudo,selection);
 		}
+    }
+	if(Stroke(ALX_KEY_N).PRESSED){
+        Sudoku_Reset(&sudo);
+    }
+	if(Stroke(ALX_KEY_M).PRESSED){
+        Sudoku_Solve(&sudo);
     }
 
 	Sudoku_Number entry = SUDOKU_INVALID;
